@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	db, err := sql.Open("mysql", "nixon:password@(127.0.0.1:3306)/go_web_eg")
+	db, err := sql.Open("mysql", "nixon:password@(127.0.0.1:3306)/go_web_eg?parseTime=true")
 	if err != nil {
 		fmt.Printf("Failed to connect to DB: error %s", err.Error())
 		panic(err)
@@ -55,6 +55,22 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Printf("User saved with ID: %d", userId)
+	fmt.Printf("User saved with ID: %d\n", userId)
 
+	// query one user
+	var (
+		id      int
+		user    string
+		pass    string
+		created time.Time
+	)
+
+	query = "SELECT id, username, password, created_at FROM users WHERE id = ?"
+
+	err = db.QueryRow(query, 1).Scan(&id, &user, &pass, &created)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("USER INFO: Id:%d Username: %s Password: %s CreatedAt: %s\n", id, user, pass, created)
 }
