@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
+	"time"
 )
 
 func main() {
@@ -20,7 +21,7 @@ func main() {
 
 	// create a table
 	query := `
-	CREATE TABLE users(
+	CREATE TABLE IF NOT EXISTS users(
 		id INT AUTO_INCREMENT,
 		username VARCHAR(32) NOT NULL,
 		password VARCHAR(72) NOT NULL,
@@ -33,6 +34,27 @@ func main() {
 	if err != nil {
 		fmt.Print(err.Error())
 	} else {
-		fmt.Print("Table created successfully")
+		fmt.Println("Table created successfully")
 	}
+
+	// insert data
+	query = "INSERT INTO users(username, password, created_at) VALUES(?, ?, ?)"
+
+	username := "nikkie"
+	password := "unsecure"
+	createdAt := time.Now()
+
+	result, err := db.Exec(query, username, password, createdAt)
+	if err != nil {
+		panic(err)
+	}
+
+	userId, err := result.LastInsertId()
+
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("User saved with ID: %d", userId)
+
 }
