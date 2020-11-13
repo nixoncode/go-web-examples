@@ -11,12 +11,20 @@ func main() {
 
 	r.HandleFunc("/", home)
 
-	r.HandleFunc("/books/{title}", createBook).Methods("POST")
-	r.HandleFunc("/books/{title}", readBook).Methods("GET")
-	r.HandleFunc("/books/{title}/{newTitle}", updateBook).Methods("PUT")
-	r.HandleFunc("/books/{title}", deleteBook).Methods("DELETE")
+	// path prefixes
+	bookRouter := r.PathPrefix("/books").Subrouter()
+
+	bookRouter.HandleFunc("", allBooks).Methods("GET")
+	bookRouter.HandleFunc("/{title}", createBook).Methods("POST")
+	bookRouter.HandleFunc("/{title}", readBook).Methods("GET")
+	bookRouter.HandleFunc("/{title}/{newTitle}", updateBook).Methods("PUT")
+	bookRouter.HandleFunc("/{title}", deleteBook).Methods("DELETE")
 
 	http.ListenAndServe(":5050", r)
+}
+
+func allBooks(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "List all the books")
 }
 
 func home(w http.ResponseWriter, r *http.Request) {
