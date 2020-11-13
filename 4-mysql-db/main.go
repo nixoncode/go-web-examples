@@ -73,4 +73,38 @@ func main() {
 	}
 
 	fmt.Printf("USER INFO: Id:%d Username: %s Password: %s CreatedAt: %s\n", id, user, pass, created)
+
+	// query all users
+	query = "SELECT id, username, password, created_at FROM users;"
+	rows, err := db.Query(query)
+	if err != nil {
+		panic(err)
+	}
+
+	type usr struct {
+		id        int64
+		username  string
+		password  string
+		createdAt time.Time
+	}
+
+	var data []usr
+	for rows.Next() {
+		var u usr
+
+		err = rows.Scan(&u.id, &u.username, &u.password, &u.createdAt)
+
+		data = append(data, u)
+	}
+	err = rows.Err()
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println("| ID | Username | Password | CreatedAt |")
+	fmt.Println("|----|----------|----------|-----------|")
+	for i := range data {
+		datum := data[i]
+		fmt.Printf("| %d | %s | %s | %s |\n", datum.id, datum.username, datum.password, datum.createdAt)
+	}
 }
