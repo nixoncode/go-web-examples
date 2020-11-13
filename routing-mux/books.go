@@ -35,6 +35,8 @@ func createBook(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 
 	title := vars["title"]
+
+	w.WriteHeader(http.StatusCreated)
 	fmt.Fprintf(w, "Creating a book with title %s", title)
 }
 
@@ -51,11 +53,13 @@ func updateBook(w http.ResponseWriter, r *http.Request) {
 	title := vars["title"]
 	newTitle := vars["newTitle"]
 
+	w.WriteHeader(http.StatusNoContent)
 	fmt.Fprintf(w, "Updating book with title '%s' to new title '%s'", title, newTitle)
 }
 
 func deleteBook(w http.ResponseWriter, r *http.Request) {
 	title := mux.Vars(r)["title"]
 
+	w.WriteHeader(http.StatusNoContent)
 	fmt.Fprintf(w, "Deleting a book with title %s", title)
 }
