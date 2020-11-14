@@ -107,4 +107,19 @@ func main() {
 		datum := data[i]
 		fmt.Printf("| %d | %s | %s | %s |\n", datum.id, datum.username, datum.password, datum.createdAt)
 	}
+
+	// update a row
+
+	query = "UPDATE users SET password = ? WHERE id = ?"
+
+	result, err = db.Exec(query, "plain password", 1)
+
+	if err != nil {
+		panic(err)
+	}
+	affectedRows, err := result.RowsAffected()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("Updated row successfully. Affected rows: %d\n", affectedRows)
 }
