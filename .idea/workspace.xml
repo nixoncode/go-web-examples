@@ -20,9 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="14756cf8-bd05-4fdd-a35b-2ccb73a09c34" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/4-mysql-db/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/4-mysql-db/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/READ.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +113,9 @@
     <MESSAGE value="fetching multiple users" />
     <MESSAGE value="added update statement" />
     <MESSAGE value="deleting inserted rows" />
-    <option name="LAST_COMMIT_MESSAGE" value="deleting inserted rows" />
+    <MESSAGE value="added ignore file" />
+    <MESSAGE value="changed select and update statements to user last insert" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed select and update statements to user last insert" />
   </component>
   <component name="WindowStateProjectService">
     <state x="562" y="367" key="#Notifications" timestamp="1605259717284">
