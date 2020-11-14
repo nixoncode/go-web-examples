@@ -67,7 +67,7 @@ func main() {
 
 	query = "SELECT id, username, password, created_at FROM users WHERE id = ?"
 
-	err = db.QueryRow(query, 1).Scan(&id, &user, &pass, &created)
+	err = db.QueryRow(query, userId).Scan(&id, &user, &pass, &created)
 	if err != nil {
 		panic(err)
 	}
@@ -112,7 +112,7 @@ func main() {
 
 	query = "UPDATE users SET password = ? WHERE id = ?"
 
-	result, err = db.Exec(query, "plain password", 1)
+	result, err = db.Exec(query, "plain password", userId)
 
 	if err != nil {
 		panic(err)
