@@ -122,4 +122,19 @@ func main() {
 		panic(err)
 	}
 	fmt.Printf("Updated row successfully. Affected rows: %d\n", affectedRows)
+
+	// delete a row
+	query = "DELETE FROM users WHERE id = ?"
+
+	result, err = db.Exec(query, userId)
+	if err != nil {
+		panic(err)
+	}
+
+	affectedRows, err = result.RowsAffected()
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("Deleted %d row Successfully", affectedRows)
 }
