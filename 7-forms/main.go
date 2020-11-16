@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"html/template"
 	"net/http"
 )
@@ -20,6 +21,14 @@ func main() {
 			_ = tmpl.Execute(w, nil)
 			return
 		}
+
+		data := ContactDetails{
+			Email:   r.FormValue("email"),
+			Subject: r.FormValue("subject"),
+			Message: r.FormValue("message"),
+		}
+
+		fmt.Fprint(w, data)
 	})
 
 	http.ListenAndServe(":5050", nil)
